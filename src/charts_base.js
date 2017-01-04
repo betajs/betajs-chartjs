@@ -3,26 +3,53 @@ Scoped.define("module:ChartJS", [
     "base:Strings"
 ], function (Dynamic, Strings, scoped) {
 
-    return Dynamic.extend({scoped: scoped}, {
-		
-		template : "<div><canvas></canvas></div>",
+    var Cls = Dynamic.extend({scoped: scoped}, {
 
-        attrs: {
-		    title: false,
-            legend: true,
-            colors: [],
-            chartdata: null,
-            options: {}
+        template : "<div><canvas></canvas></div>",
 
+        initial : {
+
+            attrs: {
+                type: "",
+                title: false,
+                legend: true,
+                colors: [],
+                chartdata: null,
+                customdataobj: null,
+                options: null,
+                chartobj: null
+
+            },
+
+            create : function() {
+                this._init(this.get("type"));
+                var element = this.element().find("canvas").get(0);
+
+                new Chart(element, this.get("chartobj"));
+            }
         },
 
-        _init: function() {
-		    if (this.get("title"))
-		        this.__addTitle(this.get("title"));
-		    if (this.get("legend") !== true)
+        _init: function(type) {
+            if (this.get("title"))
+                this.__addTitle(this.get("title"));
+            if (this.get("legend") !== true)
                 this.__addLegend(this.get("legend"));
+            if (this.get("customdataobj")) {
+                var custom = this.get("customdataobj");
+                if (custom.options)
+                    custom.options = Object.assign(this.get("options"), custom.options);
+                this.set("chartobj", custom);
+                return true;
+            }
 
-		    this.__validateData();
+            this.__validateData();
+
+            this.set("chartobj", {});
+
+            if (type !== undefined)
+                this.setProp("chartobj.type", type);
+            this.setProp("chartobj.options", this.get("options"));
+            this.setProp("chartobj.data", this.get("chartdata"));
         },
 
         __validateData: function() {
@@ -49,6 +76,8 @@ Scoped.define("module:ChartJS", [
         },
 
         __addTitle: function (value) {
+            if (!this.get("options"))
+                this.set("options", {});
             var title = "";
             if (typeof value !== "object") {
                 title = {
@@ -62,8 +91,8 @@ Scoped.define("module:ChartJS", [
         },
 
         __addLegend: function (value) {
-		    var legend = "";
-		    if (typeof value === "object") {
+            var legend = "";
+            if (typeof value === "object") {
                 legend = value;
             } else {
                 if (!value)
@@ -77,6 +106,10 @@ Scoped.define("module:ChartJS", [
         __addOption: function (key, value) {
             this.setProp("options." + key, value);
         }
-	
-	});
+
+    });
+
+    Cls.register("ba-chart");
+
+    return Cls;
 });

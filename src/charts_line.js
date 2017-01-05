@@ -8,7 +8,6 @@ Scoped.define("module:ChartJS.Line", [
 		initial : {
 
 		}
-	
 	});
 
 	Cls.register("ba-chart-line");

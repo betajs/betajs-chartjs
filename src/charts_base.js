@@ -15,17 +15,12 @@ Scoped.define("module:ChartJS", [
                 legend: true,
                 colors: [],
                 chartdata: null,
+                chartlabels: null,
                 customdataobj: null,
                 options: null,
-                chartobj: null
+                chartobj: null,
+                colorset: null
 
-            },
-
-            create : function() {
-                this._init(this.get("type"));
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
             }
         },
 
@@ -48,15 +43,19 @@ Scoped.define("module:ChartJS", [
 
             if (type !== undefined)
                 this.setProp("chartobj.type", type);
+            var data = {
+                labels: this.get("chartlabels"),
+                datasets: this.get("chartdata")
+            };
             this.setProp("chartobj.options", this.get("options"));
-            this.setProp("chartobj.data", this.get("chartdata"));
+            this.setProp("chartobj.data", data);
         },
 
         __validateData: function() {
             if (!this.get("chartdata"))
                 throw "Chart chartdata must be set";
             var chartdata = this.get("chartdata");
-            if (!chartdata.labels)
+            if (!this.get("chartlabels"))
                 console.warn("You might be missing the data labels");
             this.__validateDataSets();
 
@@ -64,14 +63,15 @@ Scoped.define("module:ChartJS", [
 
         __validateDataSets: function() {
             var chartdata = this.get("chartdata");
-            if (!chartdata.datasets)
-                console.warn("You might be missing the datasets");
-
-            chartdata.datasets.forEach(function(current, index, main) {
+            var dyn = this;
+            chartdata.forEach(function(current, index, main) {
                 if (!current.label)
                     console.warn("A dataset doesn't have a label");
-                if (chartdata.labels && (!current.data || current.data.length !== chartdata.labels.length))
+                if (dyn.get("chartlabels") && (!current.data || current.data.length !== dyn.get("chartlabels").length))
                     console.warn("The amount of data points doesn't match chart labels");
+                if (dyn.get("randomcolors")) {
+                    main[index] = dyn._addRandomColors(current);
+                }
             });
         },
 
@@ -105,11 +105,17 @@ Scoped.define("module:ChartJS", [
 
         __addOption: function (key, value) {
             this.setProp("options." + key, value);
+        },
+
+        __getRandomColors: function(amount) {
+            var colors = [];
+            for (var i = 1; i <= amount; i ++) {
+                var color = [(Math.floor(Math.random() * 256)), (Math.floor(Math.random() * 256)), (Math.floor(Math.random() * 256))];
+                colors.push(color);
+            }
+            return colors;
         }
-
     });
-
-    Cls.register("ba-chart");
 
     return Cls;
 });

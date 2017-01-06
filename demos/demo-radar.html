@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../vendors/scoped.js"></script>
+	<script src="../vendors/beta-noscoped.js"></script>
+	<script src="../vendors/betajs-browser-noscoped.js"></script>
+	<script src="../vendors/betajs-dynamics-noscoped.js"></script>
+	<script src="../vendors/Chart.js"></script>
+	<script src="../dist/betajs-chartjs-noscoped.js"></script>
+</head>
+<body>
+
+<div style="width: 400px">
+<ba-chart-radar
+		ba-title="{{{
+			display: true,
+			text: 'Chart with random colors'
+		}}}"
+		ba-chartdata="{{[
+		{label: 'My First dataset',
+	data: [65, 59, 90, 81, 56, 55, 40]
+	},
+	{
+	label: 'My Second dataset',
+	data: [28, 48, 40, 19, 96, 27, 100]
+	}
+	]}}"
+		ba-chartlabels="{{['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running']}}"
+		ba-randomcolors="{{true}}"
+>
+</ba-chart-radar>
+</div>
+<div style="width: 400px">
+	<ba-chart-radar
+			ba-chartdata="{{[
+		{label: 'My First dataset',
+		backgroundColor: 'rgba(179,181,198,0.2)',
+		borderColor: 'rgba(179,181,198,1)',
+		pointBackgroundColor: 'rgba(179,181,198,1)',
+	pointBorderColor: '#fff',
+	pointHoverBackgroundColor: '#fff',
+	pointHoverBorderColor: 'rgba(179,181,198,1)',
+	data: [65, 59, 90, 81, 56, 55, 40]
+	},
+	{
+	label: 'My Second dataset',
+	backgroundColor: 'rgba(255,99,132,0.2)',
+	borderColor: 'rgba(255,99,132,1)',
+	pointBackgroundColor: 'rgba(255,99,132,1)',
+	pointBorderColor: '#fff',
+	pointHoverBackgroundColor: '#fff',
+	pointHoverBorderColor: 'rgba(255,99,132,1)',
+	data: [28, 48, 40, 19, 96, 27, 100]
+	}
+	]}}"
+			ba-chartlabels="{{['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running']}}"
+	>
+	</ba-chart-radar>
+</div>
+<script>
+    BetaJS.Dynamics.Dynamic.activate();
+</script>
+</body>
+</html>

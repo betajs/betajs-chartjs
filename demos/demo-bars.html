@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div id="bar-chart">
+<div id="bar-chart" style="width: 500px">
 <ba-chart-bars
 		ba-chartdata="{{[
 	{
@@ -34,6 +34,27 @@
     }}}"
 >
 </ba-chart-bars>
+	<ba-chart-bars
+			ba-chartdata="{{[
+	{
+	label: 'My First dataseto',
+	data: [65, 59, 80, 81, 56, 55, 40]
+	}
+	]
+	}}"
+			ba-chartlabels="{{['January', 'February', 'March', 'April', 'May', 'June', 'July']}}"
+			ba-options="{{{
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
+    }}}"
+	>
+	</ba-chart-bars>
 </div>
 <script>
     BetaJS.Dynamics.Dynamic.activate();

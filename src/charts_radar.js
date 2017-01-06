@@ -1,13 +1,13 @@
-Scoped.define("module:ChartJS.Line", [
+Scoped.define("module:ChartJS.Radar", [
     "module:ChartJS",
     "base:Strings"
 ], function (ChartsElem, Strings, scoped) {
-	
-	var Cls = ChartsElem.extend({scoped: scoped}, {
+
+    var Cls = ChartsElem.extend({scoped: scoped}, {
 
         initial : {
             create : function() {
-                this._init("line");
+                this._init("radar");
                 var element = this.element().find("canvas").get(0);
 
                 new Chart(element, this.get("chartobj"));
@@ -46,10 +46,10 @@ Scoped.define("module:ChartJS.Line", [
 
             return dataset;
         }
-	});
+    });
 
-	Cls.register("ba-chart-line");
-	
-	return Cls;
+    Cls.register("ba-chart-radar");
+
+    return Cls;
 
 });

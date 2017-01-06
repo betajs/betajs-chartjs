@@ -3,25 +3,24 @@ Scoped.define("module:ChartJS", [
     "base:Strings"
 ], function (Dynamic, Strings, scoped) {
 
-    var Cls = Dynamic.extend({scoped: scoped}, {
+    return Dynamic.extend({scoped: scoped}, {
 
         template : "<div><canvas></canvas></div>",
 
-        initial : {
 
-            attrs: {
-                type: "",
-                title: false,
-                legend: true,
-                colors: [],
-                chartdata: null,
-                chartlabels: null,
-                customdataobj: null,
-                options: null,
-                chartobj: null,
-                colorset: null
+        attrs: {
+            type: "",
+            title: false,
+            legend: true,
+            colors: [],
+            chartdata: null,
+            chartlabels: null,
+            customdataobj: null,
+            options: null,
+            chartobj: null,
+            colorset: null
 
-            }
+
         },
 
         _init: function(type) {
@@ -76,8 +75,6 @@ Scoped.define("module:ChartJS", [
         },
 
         __addTitle: function (value) {
-            if (!this.get("options"))
-                this.set("options", {});
             var title = "";
             if (typeof value !== "object") {
                 title = {
@@ -104,6 +101,8 @@ Scoped.define("module:ChartJS", [
         },
 
         __addOption: function (key, value) {
+            if (!this.get("options"))
+                this.set("options", {});
             this.setProp("options." + key, value);
         },
 
@@ -117,5 +116,4 @@ Scoped.define("module:ChartJS", [
         }
     });
 
-    return Cls;
 });

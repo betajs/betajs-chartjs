@@ -13,7 +13,7 @@ You can use the library in the browser and compile it as well.
 
 #### Compile
 
-```javascript
+```sh
 	git clone https://github.com/betajs/betajs-chartjs.git
 	npm install
 	grunt

@@ -30,7 +30,7 @@ Scoped.define("module:ChartJS", [
                 this.__addLegend(this.get("legend"));
             if (this.get("customdataobj")) {
                 var custom = this.get("customdataobj");
-                if (custom.options)
+                if (custom.options && this.get("options"))
                     custom.options = Object.assign(this.get("options"), custom.options);
                 this.set("chartobj", custom);
                 return true;

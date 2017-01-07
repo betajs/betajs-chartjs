@@ -10,28 +10,25 @@
 </head>
 <body>
 
-<div id="bar-chart">
+<div style="width: 400px">
 <ba-chart-bars
+		ba-title="{{{
+			display: true,
+			text: 'Chart with random colors'
+		}}}"
 		ba-chartdata="{{[
+		{label: 'My First dataset',
+	data: [65, 59, 90, 81, 56, 55, 40],
+	fill: false,
+	type: 'line'
+	},
 	{
-	label: 'My First dataseto',
-	data: [65, 59, 80, 81, 56, 55, 40]
+	label: 'My Second dataset',
+	data: [28, 48, 40, 19, 96, 27, 100]
 	}
-	]
-	}}"
-		ba-chartlabels="{{['January', 'February', 'March', 'April', 'May', 'June', 'July']}}"
+	]}}"
+		ba-chartlabels="{{['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running']}}"
 		ba-randomcolors="{{true}}"
-		ba-horizontal="{{true}}"
-		ba-options="{{{
-        scales: {
-            xAxes: [{
-                stacked: true
-            }],
-            yAxes: [{
-                stacked: true
-            }]
-        }
-    }}}"
 >
 </ba-chart-bars>
 </div>

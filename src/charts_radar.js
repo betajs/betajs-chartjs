@@ -1,4 +1,4 @@
-Scoped.define("module:ChartJS.Bars", [
+Scoped.define("module:ChartJS.Radar", [
     "module:ChartJS",
     "base:Strings"
 ], function (ChartsElem, Strings, scoped) {
@@ -6,17 +6,8 @@ Scoped.define("module:ChartJS.Bars", [
     var Cls = ChartsElem.extend({scoped: scoped}, {
 
         initial : {
-            attrs: {
-                horizontal : false
-            },
-
             create : function() {
-                var type = "bar";
-                if (this.get("horizontal")) {
-                    type = "horizontalBar";
-                }
-
-                this._init(type);
+                this._init("radar");
                 var element = this.element().find("canvas").get(0);
 
                 new Chart(element, this.get("chartobj"));
@@ -25,18 +16,18 @@ Scoped.define("module:ChartJS.Bars", [
 
         _getColors: function() {
             if (this.get("randomcolors")) {
-                var chardatalength = this.get("chartdata")[0].data.length;
+                var chardatalength = 1;
                 var colors = this.__getRandomColors(chardatalength);
-                var backgroundColors = [];
-                var lineColors = [];
+                var backgroundColor;
+                var lineColor;
                 colors.forEach(function(color, index) {
                     var bgColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 0.2)";
-                    var lineColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 1)";
-                    backgroundColors.push(bgColor);
-                    lineColors.push(lineColor);
+                    var lnColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 1)";
+                    backgroundColor  = bgColor;
+                    lineColor = lnColor;
                 });
 
-                return {"backgroundColors" : backgroundColors, "lineColors": lineColors};
+                return {"backgroundColors" : backgroundColor, "lineColors": lineColor};
             }
         },
 
@@ -48,12 +39,16 @@ Scoped.define("module:ChartJS.Bars", [
                 dataset.borderColor = colors.lineColors;
                 dataset.borderWidth = 1;
             }
+            dataset.pointBackgroundColor = colors.backgroundColors;
+            dataset.pointBorderColor = '#fff';
+            dataset.pointHoverBackgroundColor = '#fff';
+            dataset.pointHoverBorderColor = colors.backgroundColors;
 
             return dataset;
         }
     });
 
-    Cls.register("ba-chart-bars");
+    Cls.register("ba-chart-radar");
 
     return Cls;
 

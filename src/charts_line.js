@@ -4,21 +4,48 @@ Scoped.define("module:ChartJS.Line", [
 ], function (ChartsElem, Strings, scoped) {
 	
 	var Cls = ChartsElem.extend({scoped: scoped}, {
-		
-		initial : {
 
+        initial : {
             create : function() {
-                this._validateData();
+                this._init("line");
                 var element = this.element().find("canvas").get(0);
 
-                this.graph = new Chart(element, {
-                    type: "line",
-                    data: this.get("chart-data"),
-                    options: this.get("chart-options")
-                });
+                new Chart(element, this.get("chartobj"));
             }
-		}
-	
+        },
+
+        _getColors: function() {
+            if (this.get("randomcolors")) {
+                var chardatalength = 1;
+                var colors = this.__getRandomColors(chardatalength);
+                var backgroundColor;
+                var lineColor;
+                colors.forEach(function(color, index) {
+                    var bgColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 0.2)";
+                    var lnColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 1)";
+                    backgroundColor  = bgColor;
+                    lineColor = lnColor;
+                });
+
+                return {"backgroundColors" : backgroundColor, "lineColors": lineColor};
+            }
+        },
+
+        _addRandomColors: function(dataset) {
+            var colors = this._getColors();
+            if (!dataset.backgroundColor)
+                dataset.backgroundColor = colors.backgroundColors;
+            if (!dataset.borderColor) {
+                dataset.borderColor = colors.lineColors;
+                dataset.borderWidth = 1;
+            }
+            dataset.pointBackgroundColor = colors.backgroundColors;
+            dataset.pointBorderColor = '#fff';
+            dataset.pointHoverBackgroundColor = '#fff';
+            dataset.pointHoverBorderColor = colors.backgroundColors;
+
+            return dataset;
+        }
 	});
 
 	Cls.register("ba-chart-line");

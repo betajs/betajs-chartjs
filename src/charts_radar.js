@@ -8,9 +8,7 @@ Scoped.define("module:ChartJS.Radar", [
         initial : {
             create : function() {
                 this._init("radar");
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 

@@ -17,9 +17,8 @@ Scoped.define("module:ChartJS.Bars", [
                 }
 
                 this._init(type);
-                var element = this.element().find("canvas").get(0);
 
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 

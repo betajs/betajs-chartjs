@@ -22,6 +22,10 @@ Scoped.define("module:ChartJS", [
 
 
         },
+        
+        getCanvas: function () {
+        	return this.activeElement().getElementsByTagName("CANVAS")[0];
+        },
 
         _init: function(type) {
             if (this.get("title"))

@@ -1,5 +1,5 @@
 /*!
-betajs-chartjs - v1.0.5 - 2017-01-07
+betajs-chartjs - v1.0.6 - 2017-01-15
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -13,9 +13,11 @@ Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "3f11db99-8d84-486b-845c-ce2280ed4446",
-    "version": "10.1483822151894"
+    "version": "1.0.6"
 };
 });
+Scoped.assumeVersion('base:version', '^1.0.96');
+Scoped.assumeVersion('dynamics:version', '^0.0.83');
 Scoped.define("module:ChartJS.Bars", [
     "module:ChartJS",
     "base:Strings"
@@ -35,9 +37,8 @@ Scoped.define("module:ChartJS.Bars", [
                 }
 
                 this._init(type);
-                var element = this.element().find("canvas").get(0);
 
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 
@@ -100,6 +101,10 @@ Scoped.define("module:ChartJS", [
             colorset: null
 
 
+        },
+        
+        getCanvas: function () {
+        	return this.activeElement().getElementsByTagName("CANVAS")[0];
         },
 
         _init: function(type) {
@@ -208,9 +213,7 @@ Scoped.define("module:ChartJS.Doughnut", [
             create : function() {
 
                 this._init("doughnut");
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 
@@ -254,9 +257,7 @@ Scoped.define("module:ChartJS.Line", [
         initial : {
             create : function() {
                 this._init("line");
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 
@@ -311,9 +312,7 @@ Scoped.define("module:ChartJS.Pie", [
             create : function() {
 
                 this._init("pie");
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 
@@ -358,9 +357,7 @@ Scoped.define("module:ChartJS.Polar", [
             create : function() {
 
                 this._init("polarArea");
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 
@@ -404,9 +401,7 @@ Scoped.define("module:ChartJS.Radar", [
         initial : {
             create : function() {
                 this._init("radar");
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 

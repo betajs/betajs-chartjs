@@ -9,9 +9,7 @@ Scoped.define("module:ChartJS.Pie", [
             create : function() {
 
                 this._init("pie");
-                var element = this.element().find("canvas").get(0);
-
-                new Chart(element, this.get("chartobj"));
+                new Chart(this.getCanvas(), this.get("chartobj"));
             }
         },
 

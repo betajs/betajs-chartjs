@@ -1,5 +1,6 @@
-# betajs-chartjs 1.0.5
+# betajs-chartjs 1.0.6
 [![Code Climate](https://codeclimate.com/github/betajs/betajs-chartjs/badges/gpa.svg)](https://codeclimate.com/github/betajs/betajs-chartjs)
+[![NPM](https://img.shields.io/npm/v/betajs-chartjs.svg?style=flat)](https://www.npmjs.com/package/betajs-chartjs)
 
 
 BetaJS-ChartJS is a ChartJS Plugin for the BetaJS Framework.

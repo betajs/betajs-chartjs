@@ -15,7 +15,7 @@
         "url": "https://github.com/betajs/betajs-chartjs/issues"
     },
     "name": "betajs-chartjs",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "BetaJS-ChartJS is a ChartJS Plugin for the BetaJS Framework.",
     "contributors": [
         "Pablo Iglesias"
@@ -33,11 +33,11 @@
         "grunt-jsdoc": "",
         "grunt-template": "",
         "grunt-contrib-csslint": "",
-        "betajs-scoped": "^0.0.13",
-        "betajs-compile": "^0.0.28",
-        "betajs": "^1.0.96",
-        "betajs-browser": "^1.0.61",
-        "betajs-dynamics": "^0.0.83"
+        "betajs-scoped": "~0.0.13",
+        "betajs-compile": "~0.0.28",
+        "betajs": "~1.0.96",
+        "betajs-browser": "~1.0.61",
+        "betajs-dynamics": "~0.0.83"
     },
     "main": "dist/betajs-chartjs.js",
     "repository": {

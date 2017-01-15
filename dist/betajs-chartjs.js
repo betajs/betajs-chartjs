@@ -1,5 +1,5 @@
 /*!
-betajs-chartjs - v1.0.6 - 2017-01-15
+betajs-chartjs - v1.0.7 - 2017-01-15
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-chartjs - v1.0.6 - 2017-01-15
+betajs-chartjs - v1.0.7 - 2017-01-15
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -1018,11 +1018,11 @@ Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "3f11db99-8d84-486b-845c-ce2280ed4446",
-    "version": "1.0.6"
+    "version": "1.0.7"
 };
 });
-Scoped.assumeVersion('base:version', '^1.0.96');
-Scoped.assumeVersion('dynamics:version', '^0.0.83');
+Scoped.assumeVersion('base:version', '~1.0.96');
+Scoped.assumeVersion('dynamics:version', '~0.0.83');
 Scoped.define("module:ChartJS.Bars", [
     "module:ChartJS",
     "base:Strings"

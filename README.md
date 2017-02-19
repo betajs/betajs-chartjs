@@ -1,7 +1,7 @@
 # betajs-chartjs 1.0.7
 [![Code Climate](https://codeclimate.com/github/betajs/betajs-chartjs/badges/gpa.svg)](https://codeclimate.com/github/betajs/betajs-chartjs)
 [![NPM](https://img.shields.io/npm/v/betajs-chartjs.svg?style=flat)](https://www.npmjs.com/package/betajs-chartjs)
-
+[![Gitter Chat](https://badges.gitter.im/betajs/betajs-chartjs.svg)](https://gitter.im/betajs/betajs-chartjs)
 
 BetaJS-ChartJS is a ChartJS Plugin for the BetaJS Framework.
 
@@ -271,7 +271,7 @@ _Note that it doesn't matter if I put a bar chart config on the ba-chart-pie dyn
 | Repository | [https://github.com/betajs/betajs-chartjs](https://github.com/betajs/betajs-chartjs) |
 | Blog       | [http://blog.betajs.com](http://blog.betajs.com) | 
 | Twitter    | [http://twitter.com/thebetajs](http://twitter.com/thebetajs) | 
- 
+| Gitter     | [https://gitter.im/betajs/betajs-chartjs](https://gitter.im/betajs/betajs-chartjs) | 
 
 
 

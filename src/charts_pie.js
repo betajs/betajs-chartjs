@@ -4,13 +4,11 @@ Scoped.define("module:ChartJS.Pie", [
 ], function (ChartsElem, Strings, scoped) {
 
     var Cls = ChartsElem.extend({scoped: scoped}, {
-
-        initial : {
-            create : function() {
-
-                this._init("pie");
-                new Chart(this.getCanvas(), this.get("chartobj"));
-            }
+	    
+        create : function() {
+            this._init("pie");
+            var chart = new Chart(this.getCanvas(), this.get("chartobj"));
+            this.set("chart", chart);
         },
 
         _getColors: function() {

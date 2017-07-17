@@ -4,22 +4,21 @@ Scoped.define("module:ChartJS.Bars", [
 ], function (ChartsElem, Strings, scoped) {
 
     var Cls = ChartsElem.extend({scoped: scoped}, {
+    
+        attrs: {
+            horizontal : false
+        },
 
-        initial : {
-            attrs: {
-                horizontal : false
-            },
-
-            create : function() {
-                var type = "bar";
-                if (this.get("horizontal")) {
-                    type = "horizontalBar";
-                }
-
-                this._init(type);
-
-                new Chart(this.getCanvas(), this.get("chartobj"));
+        create : function() {
+            var type = "bar";
+            if (this.get("horizontal")) {
+                type = "horizontalBar";
             }
+
+            this._init(type);
+
+            var chart = new Chart(this.getCanvas(), this.get("chartobj"));
+            this.set("chart", chart);
         },
 
         _getColors: function() {

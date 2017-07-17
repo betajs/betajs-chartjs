@@ -7,7 +7,6 @@ Scoped.define("module:ChartJS", [
 
         template : "<div><canvas></canvas></div>",
 
-
         attrs: {
             type: "",
             title: false,
@@ -18,11 +17,22 @@ Scoped.define("module:ChartJS", [
             customdataobj: null,
             options: null,
             chartobj: null,
-            colorset: null
-
-
+            colorset: null,
+            chart: null
         },
-        
+	
+	    events: {
+		    "change:chartdata" : function (data, previous_data) {
+			    if (previous_data) {
+			    	this.__validateDataSets();
+				    this.setProp("chartobj.data.datasets", this.get("chartdata"));
+				    this.setProp("chartobj.data.labels", this.get("chartlabels"));
+				    var chart = this.get("chart");
+				    chart.update();
+			    }
+		    }
+	    },
+	    
         getCanvas: function () {
         	return this.activeElement().getElementsByTagName("CANVAS")[0];
         },

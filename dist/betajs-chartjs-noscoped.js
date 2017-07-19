@@ -1,5 +1,5 @@
 /*!
-betajs-chartjs - v1.0.7 - 2017-01-15
+betajs-chartjs - v1.0.8 - 2017-07-17
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -13,7 +13,7 @@ Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "3f11db99-8d84-486b-845c-ce2280ed4446",
-    "version": "1.0.7"
+    "version": "1.0.8"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -24,22 +24,21 @@ Scoped.define("module:ChartJS.Bars", [
 ], function (ChartsElem, Strings, scoped) {
 
     var Cls = ChartsElem.extend({scoped: scoped}, {
+    
+        attrs: {
+            horizontal : false
+        },
 
-        initial : {
-            attrs: {
-                horizontal : false
-            },
-
-            create : function() {
-                var type = "bar";
-                if (this.get("horizontal")) {
-                    type = "horizontalBar";
-                }
-
-                this._init(type);
-
-                new Chart(this.getCanvas(), this.get("chartobj"));
+        create : function() {
+            var type = "bar";
+            if (this.get("horizontal")) {
+                type = "horizontalBar";
             }
+
+            this._init(type);
+
+            var chart = new Chart(this.getCanvas(), this.get("chartobj"));
+            this.set("chart", chart);
         },
 
         _getColors: function() {
@@ -87,7 +86,6 @@ Scoped.define("module:ChartJS", [
 
         template : "<div><canvas></canvas></div>",
 
-
         attrs: {
             type: "",
             title: false,
@@ -98,11 +96,22 @@ Scoped.define("module:ChartJS", [
             customdataobj: null,
             options: null,
             chartobj: null,
-            colorset: null
-
-
+            colorset: null,
+            chart: null
         },
-        
+	
+	    events: {
+		    "change:chartdata" : function (data, previous_data) {
+			    if (previous_data) {
+			    	this.__validateDataSets();
+				    this.setProp("chartobj.data.datasets", this.get("chartdata"));
+				    this.setProp("chartobj.data.labels", this.get("chartlabels"));
+				    var chart = this.get("chart");
+				    chart.update();
+			    }
+		    }
+	    },
+	    
         getCanvas: function () {
         	return this.activeElement().getElementsByTagName("CANVAS")[0];
         },
@@ -248,57 +257,57 @@ Scoped.define("module:ChartJS.Doughnut", [
 });
 
 Scoped.define("module:ChartJS.Line", [
-    "module:ChartJS",
-    "base:Strings"
+	"module:ChartJS",
+	"base:Strings"
 ], function (ChartsElem, Strings, scoped) {
 	
 	var Cls = ChartsElem.extend({scoped: scoped}, {
-
-        initial : {
-            create : function() {
-                this._init("line");
-                new Chart(this.getCanvas(), this.get("chartobj"));
-            }
-        },
-
-        _getColors: function() {
-            if (this.get("randomcolors")) {
-                var chardatalength = 1;
-                var colors = this.__getRandomColors(chardatalength);
-                var backgroundColor;
-                var lineColor;
-                colors.forEach(function(color, index) {
-                    var bgColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 0.2)";
-                    var lnColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 1)";
-                    backgroundColor  = bgColor;
-                    lineColor = lnColor;
-                });
-
-                return {"backgroundColors" : backgroundColor, "lineColors": lineColor};
-            }
-        },
-
-        _addRandomColors: function(dataset) {
-            var colors = this._getColors();
-            if (!dataset.backgroundColor)
-                dataset.backgroundColor = colors.backgroundColors;
-            if (!dataset.borderColor) {
-                dataset.borderColor = colors.lineColors;
-                dataset.borderWidth = 1;
-            }
-            dataset.pointBackgroundColor = colors.backgroundColors;
-            dataset.pointBorderColor = '#fff';
-            dataset.pointHoverBackgroundColor = '#fff';
-            dataset.pointHoverBorderColor = colors.backgroundColors;
-
-            return dataset;
-        }
+		
+		
+		create : function() {
+			this._init("line");
+			var chart = new Chart(this.getCanvas(), this.get("chartobj"));
+			this.set("chart", chart);
+		},
+		
+		_getColors: function() {
+			if (this.get("randomcolors")) {
+				var chardatalength = 1;
+				var colors = this.__getRandomColors(chardatalength);
+				var backgroundColor;
+				var lineColor;
+				colors.forEach(function(color, index) {
+					var bgColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 0.2)";
+					var lnColor = "rgba(" + color[0] + ", " + color[1] + ", " + color[2] + ", 1)";
+					backgroundColor  = bgColor;
+					lineColor = lnColor;
+				});
+				
+				return {"backgroundColors" : backgroundColor, "lineColors": lineColor};
+			}
+		},
+		
+		_addRandomColors: function(dataset) {
+			var colors = this._getColors();
+			if (!dataset.backgroundColor)
+				dataset.backgroundColor = colors.backgroundColors;
+			if (!dataset.borderColor) {
+				dataset.borderColor = colors.lineColors;
+				dataset.borderWidth = 1;
+			}
+			dataset.pointBackgroundColor = colors.backgroundColors;
+			dataset.pointBorderColor = '#fff';
+			dataset.pointHoverBackgroundColor = '#fff';
+			dataset.pointHoverBorderColor = colors.backgroundColors;
+			
+			return dataset;
+		}
 	});
-
+	
 	Cls.register("ba-chart-line");
 	
 	return Cls;
-
+	
 });
 
 Scoped.define("module:ChartJS.Pie", [
@@ -307,13 +316,11 @@ Scoped.define("module:ChartJS.Pie", [
 ], function (ChartsElem, Strings, scoped) {
 
     var Cls = ChartsElem.extend({scoped: scoped}, {
-
-        initial : {
-            create : function() {
-
-                this._init("pie");
-                new Chart(this.getCanvas(), this.get("chartobj"));
-            }
+	    
+        create : function() {
+            this._init("pie");
+            var chart = new Chart(this.getCanvas(), this.get("chartobj"));
+            this.set("chart", chart);
         },
 
         _getColors: function() {

@@ -1,6 +1,6 @@
 {
 	"name": "betajs-chartjs",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "BetaJS-ChartJS is a ChartJS Plugin for the BetaJS Framework.",
 	"contributors": ["Pablo Iglesias"],
 	"devDependencies": {
@@ -8,7 +8,7 @@
 		"grunt": "",
 		"grunt-contrib-jshint": "",
 		"grunt-contrib-concat": "",
-		"grunt-contrib-uglify": "",
+		"grunt-contrib-uglify": "~2.3.0",
 		"grunt-contrib-clean": "",
 		"grunt-contrib-cssmin": "",
 		"grunt-preprocess": "",

@@ -1,4 +1,4 @@
-# betajs-chartjs 1.0.7
+# betajs-chartjs 1.0.8
 [![Code Climate](https://codeclimate.com/github/betajs/betajs-chartjs/badges/gpa.svg)](https://codeclimate.com/github/betajs/betajs-chartjs)
 [![NPM](https://img.shields.io/npm/v/betajs-chartjs.svg?style=flat)](https://www.npmjs.com/package/betajs-chartjs)
 [![Gitter Chat](https://badges.gitter.im/betajs/betajs-chartjs.svg)](https://gitter.im/betajs/betajs-chartjs)

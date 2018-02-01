@@ -1,5 +1,5 @@
 /*!
-betajs-chartjs - v1.0.8 - 2017-07-17
+betajs-chartjs - v1.0.8 - 2018-01-26
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -84,7 +84,7 @@ Scoped.define("module:ChartJS", [
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template : "<div><canvas></canvas></div>",
+        template : "<div><canvas height='400'></canvas></div>",
 
         attrs: {
             type: "",
@@ -139,7 +139,8 @@ Scoped.define("module:ChartJS", [
                 labels: this.get("chartlabels"),
                 datasets: this.get("chartdata")
             };
-            this.setProp("chartobj.options", this.get("options"));
+	        var options = this.get("options");
+            this.setProp("chartobj.options", options);
             this.setProp("chartobj.data", data);
         },
 
@@ -206,7 +207,15 @@ Scoped.define("module:ChartJS", [
                 colors.push(color);
             }
             return colors;
-        }
+        },
+	    _afterActivate: function (element) {
+		    var canvas = element.querySelector("canvas");
+		    var elem = this;
+		    var chart = this.get("chart");
+		    canvas.onclick = function (evnt) {
+			    elem.trigger("onclickhandle", evnt, chart);
+		    }
+	    }
     });
 
 });

@@ -10,7 +10,12 @@
 </head>
 <body>
 
-<div style="width: 400px">
+<div style="width: 400px; height: 400px">
+	<script>
+		function lamonalisa(event) {
+			console.log("tuvieja");
+		}
+	</script>
 <ba-chart-line
 		ba-title="{{{
 			display: true,
@@ -28,6 +33,9 @@
 	]}}"
 		ba-chartlabels="{{['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running']}}"
 		ba-randomcolors="{{true}}"
+		ba-options="{{{
+			maintainAspectRatio: false
+		}}}"
 >
 </ba-chart-line>
 </div>

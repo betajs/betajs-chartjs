@@ -1,10 +1,10 @@
 /*!
-betajs-chartjs - v1.0.8 - 2017-07-17
+betajs-chartjs - v1.0.8 - 2018-01-26
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
 /** @flow **//*!
-betajs-scoped - v0.0.13 - 2017-01-15
+betajs-scoped - v0.0.17 - 2017-10-22
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -16,7 +16,7 @@ var Globals = (function () {
  * @module Globals
  * @access private
  */
-return { 
+return {
 		
 	/**
 	 * Returns the value of a global variable.
@@ -26,11 +26,11 @@ return {
 	 */
 	get : function(key/* : string */) {
 		if (typeof window !== "undefined")
-			return window[key];
+			return key ? window[key] : window;
 		if (typeof global !== "undefined")
-			return global[key];
+			return key ? global[key] : global;
 		if (typeof self !== "undefined")
-			return self[key];
+			return key ? self[key] : self;
 		return undefined;
 	},
 
@@ -64,6 +64,8 @@ return {
 	 * Globals.getPath("foo.bar")
 	 */
 	getPath: function (path/* : string */) {
+		if (!path)
+			return this.get();
 		var args = path.split(".");
 		if (args.length == 1)
 			return this.get(path);		
@@ -638,7 +640,10 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 		
 		var execute = function () {
 			this.require(args.dependencies, args.hiddenDependencies, function () {
-				arguments[arguments.length - 1].ns = ns;
+                var _arguments = [];
+                for (var a = 0; a < arguments.length; ++a)
+                    _arguments.push(arguments[a]);
+                _arguments[_arguments.length - 1].ns = ns;
 				if (this.options.compile) {
 					var params = [];
 					for (var i = 0; i < argmts.length; ++i)
@@ -658,7 +663,7 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 						}, this);
 					}
 				}
-				var result = this.options.compile ? {} : args.callback.apply(args.context || this, arguments);
+				var result = this.options.compile ? {} : args.callback.apply(args.context || this, _arguments);
 				callback.call(this, ns, result);
 			}, this);
 		};
@@ -962,7 +967,7 @@ var Public = Helper.extend(rootScope, (function () {
 return {
 		
 	guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
-	version: '0.0.13',
+	version: '0.0.17',
 		
 	upgrade: Attach.upgrade,
 	attach: Attach.attach,
@@ -1004,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-chartjs - v1.0.8 - 2017-07-17
+betajs-chartjs - v1.0.8 - 2018-01-26
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -1089,7 +1094,7 @@ Scoped.define("module:ChartJS", [
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template : "<div><canvas></canvas></div>",
+        template : "<div><canvas height='400'></canvas></div>",
 
         attrs: {
             type: "",
@@ -1144,7 +1149,8 @@ Scoped.define("module:ChartJS", [
                 labels: this.get("chartlabels"),
                 datasets: this.get("chartdata")
             };
-            this.setProp("chartobj.options", this.get("options"));
+	        var options = this.get("options");
+            this.setProp("chartobj.options", options);
             this.setProp("chartobj.data", data);
         },
 
@@ -1211,7 +1217,15 @@ Scoped.define("module:ChartJS", [
                 colors.push(color);
             }
             return colors;
-        }
+        },
+	    _afterActivate: function (element) {
+		    var canvas = element.querySelector("canvas");
+		    var elem = this;
+		    var chart = this.get("chart");
+		    canvas.onclick = function (evnt) {
+			    elem.trigger("onclickhandle", evnt, chart);
+		    }
+	    }
     });
 
 });

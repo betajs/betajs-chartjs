@@ -21,23 +21,24 @@
         "Pablo Iglesias"
     ],
     "devDependencies": {
-        "lodash": "",
-        "grunt": "",
-        "grunt-contrib-jshint": "",
-        "grunt-contrib-concat": "",
-        "grunt-contrib-uglify": "~2.3.0",
-        "grunt-contrib-clean": "",
-        "grunt-contrib-cssmin": "",
-        "grunt-preprocess": "",
-        "grunt-closure-tools": "",
-        "grunt-jsdoc": "",
-        "grunt-template": "",
-        "grunt-contrib-csslint": "",
-        "betajs-scoped": "~0.0.13",
-        "betajs-compile": "~0.0.28",
-        "betajs": "~1.0.96",
+        "betajs": "^1.0.146",
         "betajs-browser": "~1.0.61",
-        "betajs-dynamics": "~0.0.83"
+        "betajs-compile": "~0.0.28",
+        "betajs-dynamics": "0.0.118",
+        "betajs-scoped": "~0.0.13",
+        "grunt": "",
+        "grunt-betajs-docs-compile": "0.0.19",
+        "grunt-closure-tools": "",
+        "grunt-contrib-clean": "",
+        "grunt-contrib-concat": "",
+        "grunt-contrib-csslint": "",
+        "grunt-contrib-cssmin": "",
+        "grunt-contrib-jshint": "",
+        "grunt-contrib-uglify": "~2.3.0",
+        "grunt-jsdoc": "",
+        "grunt-preprocess": "",
+        "grunt-template": "",
+        "lodash": ""
     },
     "main": "dist/betajs-chartjs.js",
     "repository": {
@@ -64,5 +65,8 @@
             "betajs-browser": "https://github.com/betajs/betajs-browser",
             "betajs-dynamics": "https://github.com/betajs/betajs-dynamics"
         }
+    },
+    "dependencies": {
+        "lodash": "^4.17.5"
     }
 }

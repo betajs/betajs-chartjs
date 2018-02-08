@@ -1,6 +1,6 @@
 {
 	"name": "betajs-chartjs",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "BetaJS-ChartJS is a ChartJS Plugin for the BetaJS Framework.",
 	"contributors": ["Pablo Iglesias"],
 	"devDependencies": {

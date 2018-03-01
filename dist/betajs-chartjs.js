@@ -1,10 +1,10 @@
 /*!
-betajs-chartjs - v1.0.8 - 2018-01-26
+betajs-chartjs - v1.0.10 - 2018-03-01
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
 /** @flow **//*!
-betajs-scoped - v0.0.17 - 2017-10-22
+betajs-scoped - v0.0.17 - 2018-02-17
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -476,7 +476,7 @@ function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Obj
 	function nodeUnresolvedWatchers(node/* : Node */, base, result) {
 		node = node || nsRoot;
 		result = result || [];
-		if (!node.ready)
+		if (!node.ready && node.lazy.length === 0 && node.watchers.length > 0)
 			result.push(base);
 		for (var k in node.children) {
 			var c = node.children[k];
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-chartjs - v1.0.8 - 2018-01-26
+betajs-chartjs - v1.0.10 - 2018-03-01
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -1019,11 +1019,10 @@ var Scoped = this.subScope();
 Scoped.binding('module', 'global:BetaJS.Dynamics.ChartJS');
 Scoped.binding('base', 'global:BetaJS');
 Scoped.binding('dynamics', 'global:BetaJS.Dynamics');
-Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "3f11db99-8d84-486b-845c-ce2280ed4446",
-    "version": "1.0.8"
+    "version": "1.0.10"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');

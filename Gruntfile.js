@@ -11,8 +11,7 @@ module.exports = function(grunt) {
     .scopedclosurerevisionTask(null, "src/**/*.js", "dist/" + dist + "-noscoped.js", {
 		"module": "global:BetaJS.Dynamics.ChartJS",
 		"base": "global:BetaJS",
-		"dynamics": "global:BetaJS.Dynamics",
-		"jquery": "global:jQuery"
+		"dynamics": "global:BetaJS.Dynamics"
     }, {
     	"base:version": pkg.devDependencies.betajs,
     	"dynamics:version": pkg.devDependencies["betajs-dynamics"]

@@ -1,5 +1,5 @@
 /*!
-betajs-chartjs - v1.0.8 - 2018-01-26
+betajs-chartjs - v1.0.10 - 2018-03-01
 Copyright (c) Pablo Iglesias
 Apache-2.0 Software License.
 */
@@ -9,11 +9,10 @@ var Scoped = this.subScope();
 Scoped.binding('module', 'global:BetaJS.Dynamics.ChartJS');
 Scoped.binding('base', 'global:BetaJS');
 Scoped.binding('dynamics', 'global:BetaJS.Dynamics');
-Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "3f11db99-8d84-486b-845c-ce2280ed4446",
-    "version": "1.0.8"
+    "version": "1.0.10"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');

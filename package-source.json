@@ -27,6 +27,10 @@
 		"type": "git",
 		"url": "git://github.com/betajs/betajs-chartjs.git"
 	},
+	"scripts": {
+		"relink": "npm link betajs && npm link betajs-compile && npm link betajs-scoped && npm link betajs-browser && npm link betajs-dynamics",
+		"reinstall": "rm -f package-lock.json && rm -rf node_modules && npm i && npm run relink"
+	},
 	"meta": {
 		"guid": "3f11db99-8d84-486b-845c-ce2280ed4446",
 		"installdoc": "docsrc/common/install.md",
